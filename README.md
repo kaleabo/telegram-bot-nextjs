@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Telegram Bot with Next.js 15
 
-## Getting Started
+This is a Telegram bot built with Next.js 15 that uses Next.js's built-in HTTPS support for local development.
 
-First, run the development server:
+## Prerequisites
 
+- Node.js installed
+- Telegram account
+- Basic knowledge of JavaScript/TypeScript
+
+## Setup
+
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Create a new Telegram bot:
+   - Open Telegram and search for "@BotFather"
+   - Send `/newbot` command
+   - Follow the instructions to name your bot
+   - Save the API token you receive
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configure environment variables:
+   - Copy `.env.local.example` to `.env.local`
+   - Add your Telegram bot token to `TELEGRAM_BOT_TOKEN`
+   - The `WEBHOOK_URL` is set to `https://localhost:3000/api/bot` by default
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start the development server with HTTPS enabled:
+```bash
+npm run dev
+```
+This will start the Next.js development server with HTTPS support. You may need to accept the self-signed certificate warning in your browser.
 
-## Learn More
+5. Set up the webhook:
+```bash
+npm run setup-webhook
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Once the bot is set up and running:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Find your bot on Telegram (using the username you created)
+2. Start a conversation with your bot
+3. The bot will echo back any message you send
 
-## Deploy on Vercel
+## Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The bot's logic is implemented in `src/app/api/bot/route.ts`. You can modify this file to change how the bot responds to messages.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Environment Variables
+
+- `TELEGRAM_BOT_TOKEN`: Your Telegram bot's API token (from BotFather)
+- `WEBHOOK_URL`: The HTTPS URL for your bot's webhook (defaults to https://localhost:3000/api/bot)
+
+## Notes
+
+- The development server uses a self-signed certificate for HTTPS
+- For production, you should deploy to a proper hosting service with valid SSL certificates
+- Never commit your `.env.local` file or expose your bot token
+
+## License
+
+MIT
