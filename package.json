@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/setWebhook.mjs",
     "start": "next start",
     "lint": "next lint",
     "setup-webhook": "node scripts/setWebhook.mjs"
